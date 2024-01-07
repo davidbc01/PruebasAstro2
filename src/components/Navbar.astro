@@ -1,0 +1,331 @@
+<nav class="bg-blue-400 dark:bg-blue-700 w-full z-20 top-0 start-0">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <img src="/favicon.svg" class="h-8" alt="Flowbite Logo">
+    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AstroTests2</span>
+  </a>
+  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Empezar</button>
+      &nbsp;&nbsp;&nbsp;
+      <button id="darkModeBtn" class="bg-inherit w-8 h-8 rounded">
+        <svg class="w-[17px] h-[17px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3V1m0 18v-2M5.05 5.05 3.636 3.636m12.728 12.728L14.95 14.95M3 10H1m18 0h-2M5.05 14.95l-1.414 1.414M16.364 3.636 14.95 5.05M14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+        </svg>
+      </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+        <span class="sr-only">Abrir main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+  </div>
+  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+    <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-blue-400 rounded-lg bg-blue-400 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-blue-400 dark:bg-blue-700 md:dark:bg-blue-700 dark:border-blue-700">
+      <li>
+        <a
+          href="#"
+          class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+          aria-current="page">
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          href="#"
+          class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+          About
+        </a>
+      </li>
+    </ul>
+  </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const btnDarkMode = document.getElementById('darkModeBtn');
+    const htmlElement = document.documentElement;
+
+    // Función para actualizar el modo oscuro
+    function updateDarkMode() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+        setDarkModeIcon();
+      } else {
+        htmlElement.classList.remove('dark');
+        setLightModeIcon();
+      }
+    }
+
+    // Función para establecer el ícono en modo oscuro
+    function setDarkModeIcon() {
+      if (btnDarkMode) {
+        btnDarkMode.innerHTML = `
+          <svg class="w-[17px] h-[17px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3V1m0 18v-2M5.05 5.05 3.636 3.636m12.728 12.728L14.95 14.95M3 10H1m18 0h-2M5.05 14.95l-1.414 1.414M16.364 3.636 14.95 5.05M14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+          </svg>
+        `;
+      }
+    }
+
+    // Función para establecer el ícono en modo claro
+    function setLightModeIcon() {
+      if (btnDarkMode) {
+        btnDarkMode.innerHTML = `
+          <svg class="w-[17px] h-[17px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.509 5.75c0-1.493.394-2.96 1.144-4.25h-.081a8.5 8.5 0 1 0 7.356 12.746A8.5 8.5 0 0 1 8.509 5.75Z"/>
+          </svg>
+        `;
+      }
+    }
+
+    // Verificar y actualizar el modo oscuro en la carga de la página
+    updateDarkMode();
+
+    // Escuchar cambios en la preferencia de color del sistema operativo directamente
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Función para manejar el cambio en la preferencia de color del sistema operativo
+    function handleColorSchemeChange(event: MediaQueryListEvent) {
+      updateDarkMode();
+    }
+
+    // Suscribir la función al evento de cambio
+    colorSchemeQuery.addListener(handleColorSchemeChange);
+
+    // Toggle dark mode en el botón
+    if (btnDarkMode) {
+      btnDarkMode.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+          setLightModeIcon();
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+          setDarkModeIcon();
+        }
+      });
+    }
+  });
+
+
+  // Espera a que el DOM esté completamente cargado antes de ejecutar el código
+  /*document.addEventListener('DOMContentLoaded', function () {
+    // Obtiene referencia al botón de cambio de modo oscuro
+    const btnDarkMode = document.getElementById('darkModeBtn');
+    // Obtiene referencia al elemento HTML raíz
+    const htmlElement = document.documentElement;
+
+    // Al cargar la página o al cambiar de tema
+    // Verifica si se ha almacenado un tema oscuro en el almacenamiento local
+    // o si el navegador prefiere el tema oscuro según la configuración del sistema
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      // Agrega la clase 'dark' al elemento HTML para activar el modo oscuro
+      htmlElement.classList.add('dark');
+    } else {
+      // Elimina la clase 'dark' para desactivar el modo oscuro
+      htmlElement.classList.remove('dark');
+    }
+
+    // Activa la escucha del evento de clic en el botón de cambio de modo oscuro
+    if (btnDarkMode) {
+      btnDarkMode.addEventListener('click', () => {
+        // Verifica si el elemento HTML tiene la clase 'dark'
+        if (htmlElement.classList.contains('dark')) {
+          // Si tiene la clase 'dark', la elimina y actualiza el tema en el almacenamiento local
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          // Si no tiene la clase 'dark', la agrega y actualiza el tema en el almacenamiento local
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      });
+    }
+  });*/
+
+
+
+
+  /*--Otros metodos--*/
+  /*const btnDarkMode = document.getElementById('darkModeBtn');
+
+  if (btnDarkMode) {
+    btnDarkMode.addEventListener('click', () => {
+      console.log("Boton del modo oscuro pulsado");
+      document.documentElement.classList.toggle('dark');
+    });
+  }*/
+  /*document.addEventListener('DOMContentLoaded', function () {
+    const btnDarkMode = document.getElementById('darkModeBtn');
+    const htmlElement = document.documentElement;
+
+    // Función para actualizar el modo oscuro
+    function updateDarkMode() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+    }
+
+    // Verificar y actualizar el modo oscuro en la carga de la página
+    updateDarkMode();
+
+    // Escuchar cambios en la preferencia de color del sistema operativo
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    colorSchemeQuery.addEventListener('change', updateDarkMode);
+
+    // Toggle dark mode en el botón
+    if (btnDarkMode) {
+      btnDarkMode.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      });
+    }
+  });*/
+  /*document.addEventListener('DOMContentLoaded', function () {
+    const btnDarkMode = document.getElementById('darkModeBtn');
+    const htmlElement = document.documentElement;
+
+    // Función para actualizar el modo oscuro
+    function updateDarkMode() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+    }
+
+    // Verificar y actualizar el modo oscuro en la carga de la página
+    updateDarkMode();
+
+    // Escuchar cambios en la preferencia de color del sistema operativo
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Añadir console.log para depuración
+    console.log('Initial color scheme:', colorSchemeQuery.matches);
+    
+    colorSchemeQuery.addEventListener('change', () => {
+      // Añadir console.log para depuración
+      console.log('Color scheme changed:', colorSchemeQuery.matches);
+      updateDarkMode();
+    });
+
+    // Toggle dark mode en el botón
+    if (btnDarkMode) {
+      btnDarkMode.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      });
+    }
+  });*/
+  /*document.addEventListener('DOMContentLoaded', function () {
+    const btnDarkMode = document.getElementById('darkModeBtn');
+    const htmlElement = document.documentElement;
+
+    // Función para actualizar el modo oscuro
+    function updateDarkMode() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+    }
+
+    // Verificar y actualizar el modo oscuro en la carga de la página
+    updateDarkMode();
+
+    // Escuchar cambios en la preferencia de color del sistema operativo directamente
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Añadir console.log para depuración
+    console.log('Initial color scheme:', colorSchemeQuery.matches);
+
+    // Función para manejar el cambio en la preferencia de color del sistema operativo
+    function handleColorSchemeChange(event) {
+      // Añadir console.log para depuración
+      console.log('Color scheme changed:', event.matches);
+      updateDarkMode();
+    }
+
+    // Suscribir la función al evento de cambio
+    colorSchemeQuery.addListener(handleColorSchemeChange);
+
+    // Toggle dark mode en el botón
+    if (btnDarkMode) {
+      btnDarkMode.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      });
+    }
+  });*/
+  /*document.addEventListener('DOMContentLoaded', function () {
+    const btnDarkMode = document.getElementById('darkModeBtn');
+    const htmlElement = document.documentElement;
+
+    // Función para actualizar el modo oscuro
+    function updateDarkMode() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+    }
+
+    // Verificar y actualizar el modo oscuro en la carga de la página
+    updateDarkMode();
+
+    // Escuchar cambios en la preferencia de color del sistema operativo directamente
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Añadir console.log para depuración
+    console.log('Initial color scheme:', colorSchemeQuery.matches);
+
+    // Función para manejar el cambio en la preferencia de color del sistema operativo
+    function handleColorSchemeChange(event) {
+      // Añadir console.log para depuración
+      console.log('Color scheme changed:', event.matches);
+      updateDarkMode();
+    }
+
+    // Suscribir la función al evento de cambio
+    colorSchemeQuery.addListener(handleColorSchemeChange);
+
+    // Escuchar cambios en el localStorage
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'theme') {
+        updateDarkMode();
+      }
+    });
+
+    // Toggle dark mode en el botón
+    if (btnDarkMode) {
+      btnDarkMode.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      });
+    }
+  });*/
+</script>

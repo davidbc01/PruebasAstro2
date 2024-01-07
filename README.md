@@ -66,3 +66,8 @@ npx astro add tailwind
 ```sh
 npm install flowbite
 ```
+
+- TailwindCSS Animated (animaciones para tailwind)
+```sh
+npm i tailwindcss-animated
+```
